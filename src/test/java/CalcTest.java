@@ -20,9 +20,10 @@ public class CalcTest {
 
     @Test
     void testAddFailure(){
-        assertThrows(IllegalArgumentException.class, ()-> {
+        Exception e = assertThrows(IllegalArgumentException.class, ()-> {
             calc.add(Integer.MAX_VALUE, 1);
                 }
         );
+        assertEquals("Value is Too Large", e.getMessage());
     }
 }
