@@ -34,10 +34,10 @@ public class CalcTest {
     @Test
     void testSubtractFailure(){
 
-        Exception e = assertThrows(IllegalArgumentException.class, ()-> {
-            calc.subtract(Integer.MIN_VALUE, 1);
+        Exception e = assertThrows(IllegalStateException.class, ()-> {
+            calc.subtract(0, 1);
         });
-        assertEquals("Value is too Small", e.getMessage());
+        assertEquals("Cannot be negative result", e.getMessage());
     }
 
     @Test
@@ -47,9 +47,22 @@ public class CalcTest {
 
     @Test
     void testMultiplyFailure(){
-        Exception e = assertThrows(IllegalArgumentException.class, ()-> {
+        Exception e = assertThrows(UnsupportedOperationException.class, ()-> {
             calc.multiply(Integer.MAX_VALUE, 2);
         });
         assertEquals("Value is too Large", e.getMessage());
+    }
+
+    @Test
+    void testDivideSuccess(){
+        assertEquals(2, calc.divide(4,2));
+    }
+
+    @Test
+    void testDivideFailure(){
+        Exception e = assertThrows(ArithmeticException.class, ()-> {
+            calc.divide(0, 1);
+        });
+        assertEquals("/ by zero", e.getMessage());
     }
 }

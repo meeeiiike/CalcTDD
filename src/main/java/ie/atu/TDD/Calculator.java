@@ -11,8 +11,8 @@ public class Calculator {
 
     public int subtract(int firstNum, int secondNum) {
         long sum = (long)firstNum - secondNum;
-        if(sum < Integer.MIN_VALUE){
-            throw new IllegalArgumentException("Value is too Small");
+        if(sum < 0){
+            throw new IllegalStateException("Cannot be negative result");
         }
         return (int)sum;
     }
@@ -20,7 +20,17 @@ public class Calculator {
     public int multiply(int firstNum, int secondNum) {
         long sum = (long)firstNum * secondNum;
         if(sum> Integer.MAX_VALUE){
-            throw new IllegalArgumentException("Value is too Large");
+            throw new UnsupportedOperationException("Value is too Large");
+        }
+        return (int)sum;
+    }
+
+    public int divide(int firstNum, int secondNum) {
+        long sum = (long)firstNum / secondNum;
+        if(firstNum == 0){
+            throw new ArithmeticException("/ by zero");
+        } else if (secondNum == 0) {
+            throw new ArithmeticException("/ by zero");
         }
         return (int)sum;
     }
